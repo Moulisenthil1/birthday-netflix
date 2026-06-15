@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Netflix | Landing Page UI Design</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            <img src="images/logo.png" alt="Netflix Logo">
+        </a>
+
+        <ul class="navigation">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">TV Shows</a></li>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">Latest</a></li>
+            <li><a href="#">My List</a></li>
+        </ul>
+
+        <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span class="divider"></span>
+            <input type="text" placeholder="Search">
+        </div>
+    </header>
+
+    <div class="content">
+
+        <img src="images/title.png"
+             alt="Be Your Own Kind"
+             class="movie-title">
+        <div class="movie-info">
+            <span>2026</span>
+            <span class="age">22 old</span>
+            <span>1h 55min</span>
+            <span>Feel Good</span>
+        </div>
+        <!-- PLAY BUTTON GOES HERE -->
+        <a href="watch.html">
+            <button class="play-btn">
+                ▶ Play
+            </button>
+        </a>
+        <p>
+            Hey poochi, a very happy birthday. Maybe it is your 22nd birthday,
+            but for me it is first birthday getting so special why i didn't know but
+            I hope all will work well for us yeah got emotional can't to speak ... just
+            all the doings is all for you and you ever ... " Wish You A Very Happy Birthday"
+        </p>
+    </div>
+<!-- VIDEO PLAYER GOES HERE -->
+<div id="videoPlayer" class="video-player">
+    <video id="birthdayVideo" controls>
+        <source src="videos/birthday.mp4" type="video/mp4">
+    </video>
+
+    <button class="close-btn" onclick="closeVideo()">
+        ✖
+    </button>
+</div>
+<script>
+function playVideo(){
+    document.getElementById("videoPlayer").style.display = "block";
+    document.getElementById("birthdayVideo").play();
+}
+
+function closeVideo(){
+    document.getElementById("birthdayVideo").pause();
+    document.getElementById("videoPlayer").style.display = "none";
+}
+</script>
+
+</body>
+</html>
+
+</body>
+</html>

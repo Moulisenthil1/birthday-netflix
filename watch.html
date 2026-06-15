@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Netflix Player</title>
+    <link rel="stylesheet" href="watch.css">
+</head>
+
+<body>
+
+<div class="player">
+
+    <video id="movie" autoplay>
+        <source src="videos/birthday.mp4" type="video/mp4">
+    </video>
+
+    <div class="top-bar">
+        <div class="logo">NETFLIX</div>
+
+        <div class="title">
+            Birthday Special
+        </div>
+
+        <button class="close-btn"
+        onclick="window.location.href='index.html'">
+            ✕
+        </button>
+    </div>
+
+    <div class="center-controls controls">
+
+        <button onclick="rewindVideo()" class="rewind-btn">
+            <span>10</span>
+        </button>
+
+        <button onclick="togglePlay()"
+        id="playPauseBtn">
+            ⏸
+        </button>
+
+        <button onclick="forwardVideo()" class="forward-btn">
+            <span>10</span>
+        </button>
+
+    </div>
+
+    <input
+    type="range"
+    id="progressBar"
+    class="controls"
+    value="0"
+    min="0"
+    max="100">
+
+    <div id="timeDisplay" class="controls">
+        00:00 / 00:00
+    </div>
+
+</div>
+
+<script>
+
+const video =
+document.getElementById("movie");
+
+const progressBar =
+document.getElementById("progressBar");
+
+const playPauseBtn =
+document.getElementById("playPauseBtn");
+
+const timeDisplay =
+document.getElementById("timeDisplay");
+
+function togglePlay(){
+
+    if(video.paused){
+
+        video.play();
+
+        playPauseBtn.innerHTML = "⏸";
+
+    }else{
+
+        video.pause();
+
+        playPauseBtn.innerHTML = "▶";
+    }
+}
+
+function rewindVideo(){
+
+    video.currentTime -= 10;
+}
+
+function forwardVideo(){
+
+    video.currentTime += 10;
+}
+
+video.addEventListener("click",togglePlay);
+
+video.addEventListener("timeupdate",()=>{
+
+    let progress =
+    (video.currentTime /
+    video.duration) * 100;
+
+    progressBar.value =
+    progress;
+
+    let current =
+    formatTime(video.currentTime);
+
+    let total =
+    formatTime(video.duration);
+
+    timeDisplay.innerHTML =
+    current + " / " + total;
+});
+
+progressBar.addEventListener("input",()=>{
+
+    let seekTime =
+    (progressBar.value / 100)
+    * video.duration;
+
+    video.currentTime =
+    seekTime;
+});
+
+function formatTime(seconds){
+
+    if(isNaN(seconds))
+    return "00:00";
+
+    let mins =
+    Math.floor(seconds / 60);
+
+    let secs =
+    Math.floor(seconds % 60);
+
+    return mins + ":" +
+    String(secs).padStart(2,'0');
+}
+
+let hideTimer;
+
+function showControls(){
+
+    document
+    .querySelectorAll(".controls")
+    .forEach(el=>{
+
+        el.classList.remove(
+        "hide-controls");
+    });
+
+    clearTimeout(hideTimer);
+
+    hideTimer =
+    setTimeout(()=>{
+
+        document
+        .querySelectorAll(".controls")
+        .forEach(el=>{
+
+            el.classList.add(
+            "hide-controls");
+        });
+
+    },3000);
+}
+
+document.addEventListener(
+"mousemove",
+showControls);
+
+showControls();
+
+</script>
+
+</body>
+</html>
